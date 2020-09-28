@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href=" {{ '/assets/css/main.css'  | absolute_url }}">
 </head>
 <body>
     <header>
@@ -29,7 +29,7 @@
             <button class="hero-content-btn">Contact Now</button>
         </div>
         <div class="hero-illustration">
-            <img src="/assets/img/hero-illustration.svg" alt="">
+            <img src="{{ '/assets/img/hero-illustration.svg' | absolute_url}} " alt="">
         </div>
     </section>
 
@@ -85,7 +85,7 @@
 
             </div>
             <div class="courses-content-illustration">  
-                 <img src="/assets/img/teacher-illustration.svg" alt="">
+                 <img src="{{ '/assets/img/teacher-illustration.svg' | absolute_url}} " alt="">
                 </div>
         </div>
 
@@ -102,7 +102,7 @@
                 <input type="submit" value="Request">
             </div>
             <div class="demo-content-illustration">
-                <img src="/assets/img/tutorial-illustration.svg" alt="">
+                <img src="{{ '/assets/img/tutorial-illustration.svg' | absolute_url}} " alt="">
             </div>
         </div>
     </section>
