@@ -19,6 +19,7 @@
 
 body{
     background:white;
+    overflow-x:hidden;
 }
 
 header{
@@ -127,14 +128,18 @@ header{
     align-items:center;
 
     padding:20px;
-    // position:relative;
     background:var(--color-bg);
     color:var(--color-font);
+    overflow:hidden;
     &-background-img{
         position:absolute;
         top:0;
         left:0;
         z-index:-1;
+        border:2px solid red;
+        width:100%;
+        height:100%;
+        overflow:hidden;
         img{
             height:120vh;
         }
@@ -331,7 +336,8 @@ header{
     justify-content:center;
     padding:20px;
 
-    &-head{
+        overflow:hidden;
+        &-head{
         font-size:35px;
         padding:20px;
     }
@@ -487,7 +493,12 @@ footer{
 
     .demo{
         &-background-img{
+            position:absolute;
+            top:0;
+            left:0;
+            z-index:-1;
             border:2px solid red;
+            height:100%;
             img{
                 height:100%;
                 width:auto;
