@@ -173,9 +173,11 @@ header{
         width:500px;
         height:auto;
         overflow:hidden;
+        display:flex;
+        justify-content:center;
+        align-items:center;
         svg{
             width:100%;
-            // height:100%;
         }
     }
 }
