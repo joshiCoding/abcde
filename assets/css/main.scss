@@ -19,10 +19,10 @@
 
 body{
     background:white;
-    overflow-x:hidden;
 }
 
 header{
+
     height:80px;
     display:flex;
     flex-direction:row;
@@ -123,6 +123,7 @@ header{
 }
 
 .hero{
+
     display:flex;
     justify-content:center;
     align-items:center;
@@ -136,7 +137,6 @@ header{
         top:0;
         left:0;
         z-index:-1;
-        border:2px solid red;
         width:100%;
         height:100%;
         overflow:hidden;
@@ -170,8 +170,13 @@ header{
     }
     .hero-illustration{
         
-        width:400px;
-        height:400px;
+        width:500px;
+        height:auto;
+        overflow:hidden;
+        svg{
+            width:100%;
+            // height:100%;
+        }
     }
 }
 
@@ -225,11 +230,14 @@ header{
 }
 
 .courses{
+
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
     padding:20px;
+
+
     &-heading{
         font-size:35px;
     }
@@ -261,6 +269,7 @@ header{
         &-illustration{
             width:400px;
             height:300px;
+            
         }
     }
 }
@@ -277,7 +286,6 @@ header{
         top:0;
         left:0;
         z-index:-1;
-        border:2px solid red;
         height:100%;
         img{
             width:100%;
@@ -308,7 +316,6 @@ header{
                     top:0;
                     left:0;
                     z-index:-1;
-                    border:2px solid red;
                     height:100%;
                     img{
                         width:100%;
@@ -323,13 +330,15 @@ header{
             }
         }
         &-illustration{
-            width:450px;
+            width:480px;
             height:350px;
+            
         }
     }
 }
 
 .feedback{
+
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -385,6 +394,7 @@ header{
 }
 
 footer{
+
     background:rgba(0,0,0,0.9);
     color:white;
     display:flex;
