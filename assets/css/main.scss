@@ -168,7 +168,14 @@ header{
 
             color:var(--color-font);
             background:var(--color-prim);
-            border:none;
+            border:2px solid var(--color-prim);
+            a{
+                text-decoration:none;
+                color:white;
+            }
+            &:hover{
+                background:none;
+            }
         }
     }
     .hero-illustration{
@@ -339,6 +346,12 @@ header{
                 padding:10px;
                 width:300px;
             }
+            input[type="submit"]{
+                &:hover{
+                    border-color:var(--color-prim);
+                    background:var(--color-prim);
+                }
+            }
         }
         &-illustration{
             width:480px;
@@ -395,9 +408,16 @@ header{
             width:100%;
             input{
                 width:calc(100% - 10px);
-                background:#136FC4;
-                border:none;
+                background:var(--color-prim);
+                border:2px solid var(--color-prim);
+                padding:15px;
                 color:white;
+                font-size:20px;
+                font-weight:bold;
+                &:hover{
+                    background:white;
+                    color:var(--color-prim);
+                }
             }
         }
        
@@ -470,13 +490,20 @@ header{
         }
         button{
             background:var(--color-prim);
-            border:none;
+            border:2px solid var(--color-prim);
             border-radius:20px;
-            padding:10px 20px;
+            padding:10px 30px;
             color:white;
             font-size:20px;
             margin:20px;
             margin-bottom:10px;
+            a{
+                text-decoration:none;
+                color:white;
+            }
+            &:hover{
+                background:none;
+            }
         }
     }
     &-illustration{
