@@ -8,6 +8,8 @@
     box-sizing:border-box;
 }
 
+//fonts 
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&family=Rubik:ital,wght@0,500;0,700;1,400&display=swap');
 // global variables and color
 :root{
     --color-prim:#136FC4;
@@ -28,6 +30,7 @@ header{
     flex-direction:row;
     justify-content:space-between;
     align-items:flex-start;
+    font-family:'Mulish', sans-serif;
 
     background:var(--color-bg);
     color:var(--color-font);
@@ -39,6 +42,7 @@ header{
         align-items:center;
         justify-content:center;
         font-size:20px;
+        font-weight:700;
     }
     .desktop-menu{
         width:70%;
@@ -47,6 +51,7 @@ header{
         flex-direction:row;
         justify-content:flex-end;
         align-items:center;
+        font-weight:600;
         li{
             list-style-type:none;
             margin:10px;
@@ -62,6 +67,7 @@ header{
     }
     .mobile-menu{
        display:none;
+       font-weight:600;
       
         .menu-icon{
             width:50px;
@@ -130,6 +136,8 @@ header{
     display:flex;
     justify-content:center;
     align-items:center;
+    font-family: 'Mulish', sans-serif;
+    font-weight:700;
 
     padding:20px;
     background:var(--color-bg);
@@ -197,6 +205,7 @@ header{
 
     padding:20px;
     background:white;
+    font-family:'Rubik',sans-serif;
 
     display:flex;
     flex-direction:column;
@@ -204,6 +213,7 @@ header{
     align-items:center;
     &-heading{
         font-size:35px;
+        font-weight:700;
 
     }
     &-content{
@@ -238,6 +248,11 @@ header{
 
                 &-head{
                     padding:5px;
+                    font-weight:500;
+                }
+                &-para{
+                    font-family:'Mulish', sans-serif;
+                    font-weight:600;
                 }
             }
         }
@@ -252,19 +267,26 @@ header{
     justify-content:center;
     padding:20px;
     background:rgba(244,244,244,1);
+    font-family:'Rubik', sans-serif;
 
 
     &-heading{
         font-size:35px;
+        font-weight:700;
+
     }
     &-para{
         padding:20px;
         width:75%;
         text-align:center;
+        font-family:'Mulish', sans-serif;
+        font-weight:400;
     }
     &-content{
         display:flex;
         align-items:center;
+        font-family:'Mulish', sans-serif;
+        font-weight:400;
 
 
         &-list{
@@ -300,6 +322,8 @@ header{
 .demo{
     background:rgba(0,0,0,0.8);
     color:var(--color-font);
+    font-family:'Rubik', sans-serif;
+
 
     padding:20px;
     position:relative;
@@ -321,6 +345,8 @@ header{
     align-items:center;
     &-head{
         font-size:30px;
+        font-weight:700;
+
     }
     &-content{
         display:flex;
@@ -350,6 +376,11 @@ header{
                 border-radius:20px;
                 padding:10px;
                 width:300px;
+                &::placeholder{
+                    font-family:'Mulish', sans-serif;
+                    font-weight:400;
+
+                }
             }
             input[type="submit"]{
                 &:hover{
@@ -372,7 +403,9 @@ header{
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    padding:20px;
+    padding:20px;                    font-family:'Rubik', sans-serif;
+    font-weight:700;
+
 
         overflow:hidden;
         &-head{
@@ -392,6 +425,10 @@ header{
             padding:10px;
             margin:5px;
             width:300px;
+            &::placeholder{
+                font-family:'Mulish', sans-serif;
+                font-weight:400;
+            }
         }
         .line-3{
             width:100%;
@@ -430,7 +467,7 @@ header{
 }
 
 .about-contact-bg{
-   
+
     padding:20px 0;
     position:relative;
     .bg-img{
@@ -451,15 +488,20 @@ header{
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    font-family:'Rubik', sans-serif;
 
     &-head{
         text-align:center;
         font-size:30px;
+        font-weight:700;
+
     }
     &-para{
         padding:20px;
         text-align:justify;
         max-width:700px;
+        font-family:'Mulish', sans-serif;
+        font-weight:600;
 
     }
 }
@@ -471,6 +513,7 @@ header{
     display:flex;
     align-items:center;
     justify-content:center;
+    font-family:'Rubik', sans-serif;
     
     &-content{
         display:flex;
@@ -480,10 +523,14 @@ header{
             text-align:center;
             font-size:30px;
             padding:30px;
+            font-weight:700;
         }
         &-para{
             margin:0 30px;
             margin-bottom:10px;
+            font-family:'Mulish', sans-serif;
+            font-weight:400;
+
         }
         &-list{
             margin:0 30px;
@@ -530,7 +577,10 @@ footer{
     display:flex;
     justify-content:space-around;
     padding-top:50px;
-    padding-bottom:50px;
+    padding-bottom:50px;            font-family:'Rubik', sans-serif;
+    font-weight:400;
+
+
     .foot-about{
         width:30vw;
     
@@ -538,9 +588,13 @@ footer{
             font-size:25px;
             padding:10px;
             padding-bottom:0;
+            font-weight:500;
+
         }
         &-para{
             padding:10px;
+            padding-bottom:50px;         font-family:'Mulish', sans-serif;
+            font-weight:400;
         }
     }
     .foot-links{
