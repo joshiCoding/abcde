@@ -879,6 +879,8 @@ footer{
     height:auto;
     display:flex;
     flex-direction:column;
+    overflow:hidden;
+    position:relative;
 }
 .testimony-head{
     font-size:30px;
@@ -888,6 +890,8 @@ footer{
     display:flex;
     align-items:center;
     justify-content:center;
+    overflow:hidden;
+    // position:relative;
 }
 .testimony-says{
     border:2px solid black;
