@@ -2,12 +2,8 @@
 //message variables
 $msg = '';
 $msg_class = '';
-$name = '';
-$email = '';
-
-$from = '';
-$to = '';
-$subject = '';
+$mailReciever = 'mohit9451joshi@gmail.com';// replace this with client destination email
+$mailSender = "Office@abcdeducators.in";
 
 //check for submission
 if(filter_has_var(INPUT_POST, 'submit')){
@@ -17,55 +13,117 @@ if(filter_has_var(INPUT_POST, 'submit')){
     $state = htmlspecialchars($_POST['state']);
     $course = htmlspecialchars($_POST['course']);
 
-    $from = htmlspecialchars($_POST['email']);
-    $subject = 'Testing the Mail';
-    $message = 'A test message from the site';
-    $to = 'contact@abcdeducators.in';
-    $headers = "MIME-VERSION: 1.0" . "\r\n";
-    $headers .="Content-Type:text/html;charset=UTF-8" . "\r\n";
-    $headers .="From : " . $from . "\r\n";
 
-    
+    // check required fields
+    if(!empty($email) && !empty($name) && !empty($course)){
+        //passed
+        //check Email
+        if(filter_var($email, FILTER_VALIDATE_EMAIL) === false ){
+            //failed email check
+            $msg = 'Please use a valid email';
+            $msgclass = 'alert-danger';
+        }
+        else {
+            //passed
+            //sending information
+            $to = $mailReciever;   
+            $subject = 'Enquiry for Demo on the ABCDE site';
+        
+            $message = "Name : " . $name . "<br>\r\n";
+            $message .= "Email : " . $email . "<br>\r\n";
+            $message .= "State : " . $state . "<br>\r\n";
+            $message .= "Course : " . $course . "<br>\r\n";
+            $from = $mailSender;
+
+            //email headers
+            $headers = "MIME-VERSION:1.0"."\r\n";
+            $headers .= "Content-Type:text/html;charset=UTF-8"."\r\n";
+
+            //additional headers
+            $headers .="From: ".$from."\r\n";
+
+            if(mail($to, $subject,$message,$headers)){
+                //email sent
+                $msg = 'Your email was sent';
+                $msgclass = 'alert-success';
+            }
+            else{
+                //Failed 
+                $msg= "your email was not sent";
+                $msgclass="alert-danger";
+            }
+        }
+    }
+}
+
+// for feedback form
+$fdMsg = '';
+$fdMsgClass = '';
+
+if(filter_has_var(INPUT_POST, 'fd-submit')){
+    //get data
+    $fdFname = htmlspecialchars($_POST['fd-fname']);
+    $fdLname = htmlspecialchars($_POST['fd-lname']);
+    $fdEmail = htmlspecialchars($_POST['fd-email']);
+    $fdPno = htmlspecialchars($_POST['fd-pno']);
+    $fdSubject = htmlspecialchars($_POST['fd-subject']);
+    $fdMessage = htmlspecialchars($_POST['fd-message']);
+
+    if((!empty($fdEmail) || !empty($fdPno)) && (!empty($fdMessage) || !empty($fdSubject)) ){
 
 
-    //check required fields
-    // if(!empty($email) && !empty($name) && !empty($course)){
-    //     //passed
-    //     //check Email
-    //     if(filter_var($email, FILTER_VALIDATE_EMAIL) === false ){
-    //         //failed email check
-    //         $msg = 'Please use a valid email';
-    //         $msgclass = 'alert-danger';
-    //     }
-    //     else {
-    //         //passed
-    //         $toEmail = 'mohit9451joshi@gmail.com';
-    //         $subject = 'Contact Request Form of '. $name;
-    //         $body = '<h2>Contact Request</h2>
-    //                 <h4>Name</h4> : <p>'.$name.'</p>
-    //                 <h4>Email</h4> : <p>'.$email.'</p>
-    //                 <h4>Course</h4> : <p>'.$course.'</p>
-    //                 <h4>State</h4> : <p>'.$state.'</p>'; 
+        // check for valid email
+        if(filter_var($fdEmail, FILTER_VALIDATE_EMAIL) === false ){
+            //failed email check
+            $fdMsg = 'Please use a valid email';
+            $fdMsgClass = 'alert-danger';
+        }
+        // check for valid phone number (contains only numbers)
+        else if(false){
+            // do it later
+        }
+        // send mail to the client informing about enquiry
+        else{
+            $to = $mailReciever;
+            $from = $mailSender;
+            $name = '';
+            if(!empty(fdFname)) $name .= $fdFname . " ";
+            if(!empty(fdLname)) $name .= $fdLname . " ";
 
-    //         //email headers
-    //         $headers = "MIME-VERSION:1.0"."\r\n";
-    //         $headers .= "Content-Type:text/html;charset=UTF-8"."\r\n";
+            $subject = "Feedback from ABCDE site";
+            
+            $message = "<b>This is the Feedback Enquiry from ABCDE site</b>";
 
-    //         //additional headers
-    //         $headers .="From:".$name."<".$email.">"."\r\n";
+            $message .= "<hr> <b>Contact Information</b> <hr>";
+            $message .= "<b>Name</b> : " . $name  ."<br>";
+            if(!empty(fdEmail)) $message .= "<b>Email</b> : " . $fdEmail . "<br>";
+            if(!empty(fdPno)) $message .= "<b>Phone Number</b> : " . $fdPno . "<br>";
+            
+            $message .= "<hr><b>Feedback Given</b><hr>";
+            if(!empty(fdSubject)) $message .= "<b>Subject<b> : " . $fdSubject . "<br>";
+            if(!empty(fdMessage)) $message .= "<b>Message<b> : <br>" . $fdMessage . "<br>";
 
-    //         if(mail($toEmail, $subject,$body,$headers)){
-    //             //email sent
-    //             $msg = 'Your email was sent';
-    //             $msgclass = 'alert-success';
-    //         }
-    //         else{
-    //             //Failed 
-    //             $msg= "your email was not sent";
-    //             $msgclass="alert-danger";
-    //         }
-    //     }
-    // }
+            //email headers
+            $headers = "MIME-VERSION:1.0"."\r\n";
+            $headers .= "Content-Type:text/html;charset=UTF-8"."\r\n";
+
+            //additional headers
+            $headers .="From: ".$from."\r\n";
+
+            if(mail($to, $subject,$message,$headers)){
+                //email sent
+                $fdMsg = 'Your email was sent';
+                $fdMsgClass = 'alert-success';
+            }
+            else{
+                //Failed 
+                $fdMsg= "your email was not sent";
+                $fdMsgClass="alert-danger";
+            }
+        }
+
+
+    }
 }
 
 ?>
@@ -226,24 +284,14 @@ if(filter_has_var(INPUT_POST, 'submit')){
                 
                 <input type="submit" value="Submit" name= "submit">
                 </form>
+
+                <!-- for after submit action -->
             </div>
             <div class="demo-content-illustration">
                 <img src="/assets/img/tutorial-illustration.svg" alt="">
             </div>
         </div>
     </section>
-
-    <?php 
-    if( isset($_POST['submit'])){
-        if(mail($to , $subject , $message, $headers)){
-            echo "Mail sent successfully to " ;
-            echo $to;
-        }
-        else {
-            echo "Could not sent message, try again later";
-        }
-    }
-    ?>
 
 <!-- testimony carousel here -->
 
@@ -340,6 +388,41 @@ if(filter_has_var(INPUT_POST, 'submit')){
 
     </div>
 
+
+<!-- feedback form starts here-->
+<section class="feedback" id="feedback">
+        <div class="feedback-head">Give us Feedback</div>
+        <div class="feedback-form">
+
+                <?php if($fdMsg != '') : ?>
+                    <div class = "alert <?php echo $fdMsgClass;?>">
+                        <?php echo $fdMsg?>
+                    </div>
+                <?php endif ;?>
+
+        <form method = "post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+    
+            <div class="feedback-form-line">
+                <input type="text" name = "fd-fname"placeholder="First Name" value = "">
+                <input type="text" name = "fd-lname"placeholder="Last Name" value = "">
+            </div>
+            <div class="feedback-form-line">
+                <input type="text" name = "fd-email" placeholder="Email" value = "">
+                <input type="text" name = "fd-pno" placeholder="Phone Number" value = "">
+            </div>
+            <div class="feedback-form-line line-3">
+                <input type="text" name = "fd-subject" placeholder="Subject" value = "">
+            </div>
+            <div class="feedback-form-line line-4">
+                <textarea name="fd-message" id="" cols="30" rows="10" placeholder = "Write Your Message Here"></textarea>
+            </div>
+            <div class="feedback-form-line line-5">
+                <input type="submit" value="Send" name ="fd-submit">
+            </div>
+        </form>    
+        </div>
+</section>
+
 <!-- footer starts here -->
     <footer>
         <div class="foot-about">
@@ -358,19 +441,7 @@ if(filter_has_var(INPUT_POST, 'submit')){
                 <li class="foot-links-content-item"><a href="#feedback" class="smooth-scroll">Feedback</a></li>
             </div>
         </div>
-        <!-- <div class="subscribe">
-            <div class="subscribe-head">SUBSCRIBE</div>
-            <div class="subscribe-para">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus pariatur magnam, eius nihil incidunt consequuntur quidem aliquam quisquam amet deleniti ipsa natus fugit. Qui quia pariatur mollitia dicta aperiam quidem!</div>
-            <div class="subscribe-action">
-                <input type="text" placeholder = "Email">
-                <input type="submit" value="Send">
-            </div>
-        </div> -->
     </footer>
-
-   
-
-   
+ 
 </body>
 </html>
-
