@@ -1,7 +1,7 @@
 <?php
+
 $dev = true;
 
-if($dev == true) $abspath = '';
-else $abspath = '';
+$abspath = '';  // older dependency no longer needed but still in the code
 
 ?>

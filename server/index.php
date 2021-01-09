@@ -13,9 +13,10 @@
 
 <!-- development warning -->
 <?php if($dev == true):?>
-    <script>
-    // alert('The site is under constant contruction. So some or all features may appear broken at times. Please be patient untill official release.');
-    </script>
+    <div class="general-notice">
+        <p>This site is under constant contsruction. So some or all features may appear broken at times. Please be patient untill official release.</p>
+        <button class="general-notice-close">Close</button>
+    </div>
 <?php endif;?>
 
 
@@ -74,7 +75,7 @@
         <div class="demo-content-form">
             <!-- for before submit action -->
             <form method = "post" action="" class="demo-before-submit">
-                <input type="text" name ="email" placeholder = "Email or Phone number" value = "" class = "demo-input" >
+                <input type="text" name ="email" placeholder = "Email or Phone number" value = "" class = "demo-input demo-input-email" >
                 <div class="demo-notification demo-email-notif"></div>
 
                 <input type="text" name ="name" placeholder = "Name" value = "">

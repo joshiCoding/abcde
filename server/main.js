@@ -1,5 +1,8 @@
-// <!-- development warning -->
-
+// <!-- general notice -->
+const generalNotice = document.querySelector('.general-notice');
+generalNotice.querySelector('button').addEventListener('click', () =>{
+    generalNotice.style.display = "none";
+})
 
 
 // for creating mobile menu
@@ -163,6 +166,7 @@ function demoValidator(input){
         notification[0].style.visibility = "visible";
         notification[0].innerHTML = "Please give a email or phone number";
         input[0].style.borderColor = "red";
+        console.log(input[0]);
     }
     else if(!emailValidator(input[0].value) && !phoneValidator(input[0].value)){
         notification[0].style.visibility = "visible";
