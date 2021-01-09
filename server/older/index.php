@@ -1,11 +1,141 @@
+<?php 
+//message variables
+$msg = '';
+$msg_class = '';
+$mailReciever = 'mohit9451joshi@gmail.com';// replace this with client destination email
+$mailSender = "Office@abcdeducators.in";
+
+//check for submission
+if(filter_has_var(INPUT_POST, 'submit')){
+    //get data
+    $name = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
+    $state = htmlspecialchars($_POST['state']);
+    $course = htmlspecialchars($_POST['course']);
+
+
+    // check required fields
+    if(!empty($email) && !empty($name) && !empty($course)){
+        //passed
+        //check Email
+        if(filter_var($email, FILTER_VALIDATE_EMAIL) === false ){
+            //failed email check
+            $msg = 'Please use a valid email';
+            $msgclass = 'alert-danger';
+        }
+        else {
+            //passed
+            //sending information
+            $to = $mailReciever;   
+            $subject = 'Enquiry for Demo on the ABCDE site';
+        
+            $message = "Name : " . $name . "<br>\r\n";
+            $message .= "Email : " . $email . "<br>\r\n";
+            $message .= "State : " . $state . "<br>\r\n";
+            $message .= "Course : " . $course . "<br>\r\n";
+            $from = $mailSender;
+
+            //email headers
+            $headers = "MIME-VERSION:1.0"."\r\n";
+            $headers .= "Content-Type:text/html;charset=UTF-8"."\r\n";
+
+            //additional headers
+            $headers .="From: ".$from."\r\n";
+
+            if(mail($to, $subject,$message,$headers)){
+                //email sent
+                $msg = 'Your email was sent';
+                $msgclass = 'alert-success';
+            }
+            else{
+                //Failed 
+                $msg= "your email was not sent";
+                $msgclass="alert-danger";
+            }
+        }
+    }
+}
+
+// for feedback form
+$fdMsg = '';
+$fdMsgClass = '';
+
+if(filter_has_var(INPUT_POST, 'fd-submit')){
+    //get data
+    $fdFname = htmlspecialchars($_POST['fd-fname']);
+    $fdLname = htmlspecialchars($_POST['fd-lname']);
+    $fdEmail = htmlspecialchars($_POST['fd-email']);
+    $fdPno = htmlspecialchars($_POST['fd-pno']);
+    $fdSubject = htmlspecialchars($_POST['fd-subject']);
+    $fdMessage = htmlspecialchars($_POST['fd-message']);
+
+    if((!empty($fdEmail) || !empty($fdPno)) && (!empty($fdMessage) || !empty($fdSubject)) ){
+
+
+        // check for valid email
+        if(filter_var($fdEmail, FILTER_VALIDATE_EMAIL) === false ){
+            //failed email check
+            $fdMsg = 'Please use a valid email';
+            $fdMsgClass = 'alert-danger';
+        }
+        // check for valid phone number (contains only numbers)
+        else if(false){
+            // do it later
+        }
+        // send mail to the client informing about enquiry
+        else{
+            $to = $mailReciever;
+            $from = $mailSender;
+            $name = '';
+            if(!empty(fdFname)) $name .= $fdFname . " ";
+            if(!empty(fdLname)) $name .= $fdLname . " ";
+
+            $subject = "Feedback from ABCDE site";
+            
+            $message = "<b>This is the Feedback Enquiry from ABCDE site</b>";
+
+            $message .= "<hr> <b>Contact Information</b> <hr>";
+            $message .= "<b>Name</b> : " . $name  ."<br>";
+            if(!empty(fdEmail)) $message .= "<b>Email</b> : " . $fdEmail . "<br>";
+            if(!empty(fdPno)) $message .= "<b>Phone Number</b> : " . $fdPno . "<br>";
+            
+            $message .= "<hr><b>Feedback Given</b><hr>";
+            if(!empty(fdSubject)) $message .= "<b>Subject<b> : " . $fdSubject . "<br>";
+            if(!empty(fdMessage)) $message .= "<b>Message<b> : <br>" . $fdMessage . "<br>";
+
+            //email headers
+            $headers = "MIME-VERSION:1.0"."\r\n";
+            $headers .= "Content-Type:text/html;charset=UTF-8"."\r\n";
+
+            //additional headers
+            $headers .="From: ".$from."\r\n";
+
+            if(mail($to, $subject,$message,$headers)){
+                //email sent
+                $fdMsg = 'Your email was sent';
+                $fdMsgClass = 'alert-success';
+            }
+            else{
+                //Failed 
+                $fdMsg= "your email was not sent";
+                $fdMsgClass="alert-danger";
+            }
+        }
+
+
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABCDEducators</title>
-    <link rel="stylesheet" href=" {{ '/assets/css/main.css'  | absolute_url }}">
-    <script src="{{ '/assets/js/main.js' |absolute_url }}" defer></script>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="/assets/js/main.js" defer></script>
 
     <!-- smooth scroll script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.1.3/smooth-scroll.min.js"></script>
@@ -43,14 +173,14 @@
 
 <!-- hero section starts -->
     <section class="hero" id = "home">
-       <div class="hero-background-img"><img src="{{ '/assets/img/hero_1-min.jpg' |absolute_url }}" alt=""></div>
+       <div class="hero-background-img"><img src="/assets/img/hero_1-min.jpg" alt=""></div>
         <div class="hero-content">
             <h1 class="hero-content-heading">Learn From the Experts</h1>
             <p class="hero-content-para">The best teachers from whole world are now at your doorstep , with better learning techniques in your native accents.</p>
             <button class="hero-content-btn"><a href="tel:8005405260">Call Us Now</a></button>
         </div>
         <div class="hero-illustration">
-            <img src="{{ '/assets/img/hero-illustration.svg' | absolute_url}} " alt="">
+            <img src="/assets/img/hero-illustration.svg" alt="">
         </div>
     </section>
 
@@ -60,14 +190,14 @@
         <div class="programs-content">
             <div class="prog-box-container">
             <div class="programs-content-prog prog-box">
-                <div class="prog-box-img"><img src="{{ '/assets/img/img_1-min.jpg' | absolute_url }}" alt=""></div>
+                <div class="prog-box-img"><img src="/assets/img/img_1-min.jpg" alt=""></div>
                 <div class="prog-box-content">
                     <h1 class="prog-box-content-head">Online Tutorials</h1>
                     <p class="prog-box-content-para">Best online tutoring in your local accent to brighten your child's future even further.</p>
                 </div>
             </div>
             <div class="programs-content-prog prog-box">
-                <div class="prog-box-img"><img src="{{ '/assets/img/img_2-min.jpg' | absolute_url }}" alt=""></div>
+                <div class="prog-box-img"><img src="/assets/img/img_2-min.jpg" alt=""></div>
                 <div class="prog-box-content">
                     <h1 class="prog-box-content-head">Homework Help</h1>
                     <p class="prog-box-content-para">We provide in-depth help with homework also, to reduce the burden on child and to grasp the minute details of the concept.</p>
@@ -78,14 +208,14 @@
         <div class="prog-box-container">
 
             <div class="programs-content-prog prog-box">
-                <div class="prog-box-img"><img src="{{ '/assets/img/img_3-min.jpg' | absolute_url }}" alt=""></div>
+                <div class="prog-box-img"><img src="/assets/img/img_3-min.jpg" alt=""></div>
                 <div class="prog-box-content">
                     <h1 class="prog-box-content-head">1 on 1 Live Classes</h1>
                     <p class="prog-box-content-para">In one-on-one classes we have uniquely designed environment for your child only.</p>
                 </div>
             </div>
              <div class="programs-content-prog prog-box">
-                <div class="prog-box-img"><img src="{{ '/assets/img/img_4-min.jpg' | absolute_url }}" alt=""></div>
+                <div class="prog-box-img"><img src="/assets/img/img_4-min.jpg" alt=""></div>
                 <div class="prog-box-content">
                     <h1 class="prog-box-content-head">All Subject Tutors</h1>
                     <p class="prog-box-content-para">You can find the tutor for all the subjects you need here. All Tutors are highly experienced in innovative ways of teaching</p>
@@ -120,7 +250,7 @@
 
             </ul>
             <div class="courses-content-illustration">  
-                 <img src="{{ '/assets/img/teacher-illustration.svg' | absolute_url}} " alt="">
+                 <img src="/assets/img/teacher-illustration.svg" alt="">
                 </div>
         </div>
     </section>
@@ -128,27 +258,38 @@
 
 
 <!-- demo form starts here -->
-    <section class="demo" id="demo">
-        <div class="demo-background-img"><img src="{{ '/assets/img/hero_1-min.jpg' |absolute_url }}" alt=""></div>
+<section class="demo" id="demo">
+        <div class="demo-background-img"><img src="/assets/img/hero_1-min.jpg" alt=""></div>
         <div class="demo-head">Request a free Demo Class</div>
         <div class="demo-content">
             <div class="demo-content-form">
-                <form action="" class = "demo-before-submit">
-                    <input type="text" placeholder = "Email">
-                    <input type="text" placeholder = "Name">
-                    <input type="text" placeholder = "State">
-                    <input type="text" placeholder = "Enter Your Course">
-                    <input type="submit" value="Request">
+                <?php if($msg != '') : ?>
+                    <div class = "alert <?php echo $msgclass;?>">
+                        <?php echo $msg?>
+                    </div>
+                <?php endif ;?>
+
+                <form method = "post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+                <input type="text" name ="email" placeholder = "Email" 
+                value = "<?php echo isset($_POST['email']) ? $email : '' ;?>">
+
+                <input type="text" name ="name" placeholder = "Name"
+                value = "<?php echo isset($_POST['name']) ? $name : '' ;?>">
+                
+                <input type="text" name = "state" placeholder = "State" 
+                value = "<?php echo isset($_POST['state']) ? $state : '' ;?>">
+                
+                <input type="text" name = "course" placeholder = "Enter Your Course" 
+                value = "<?php echo isset($_POST['course']) ? $course : '' ;?>">
+                
+                <input type="submit" value="Request Demo" name= "submit">
                 </form>
-                <div class="demo-after-submit">
-                    <p>Thanks for putting enquiry for demo . We will reach you the soonest we can.</p>
-                    <button>Request Again</button>
-                </div>
+
+                <!-- for after submit action -->
                 
             </div>
-
             <div class="demo-content-illustration">
-                <img src="{{ '/assets/img/tutorial-illustration.svg' | absolute_url}} " alt="">
+                <img src="/assets/img/tutorial-illustration.svg" alt="">
             </div>
         </div>
     </section>
@@ -203,130 +344,12 @@
         <button class="prev-btn">&#10094;</button>
         
     </div>
-
     
-    <script>
-       console.log(window.innerWidth)
-       let totWidth = window.innerWidth;
-       let slides = document.querySelectorAll(".testimony-says")
-       let totSlides = slides.length;
-       let midSlide = Math.floor(totSlides/2);
-       slides.forEach(slide =>{
-            // slide.style.visibility = "hidden";
-            slide.style.display = "none";
-       })
-
-       const nextBtn = document.querySelector('.next-btn');
-       const prevBtn = document.querySelector('.prev-btn');
-
-    let curSlide = [];
-    console.log(slides[0].getBoundingClientRect().left)
-
-    if(totWidth < 500){
-    //    for mobile client
-        curSlide =[midSlide];
-
-    }
-    else if(totWidth < 800){
-    //    for tablet 2 testimony
-    curSlide =[midSlide-1 , midSlide];
-
-    } 
-    else{
-    //    for desktop 3 testimony
-    curSlide =[midSlide-1 , midSlide, midSlide +1];
-    }
-
-    curSlide.forEach((i) =>{
-        // slides[i].style.visibility = "visible";
-        slides[i].style.display = "flex"
-
-    })
-    console.log(slides[1].style.right)
-
-    console.log(slides[1].style.right)
-
-    forwardSlide = () =>{
-        let push = curSlide[curSlide.length -1] +1;
-        if(push >= totSlides) push = 0;
-        curSlide.push(push);
-        curSlide.shift();
-        console.log(curSlide);
-    }
-
-    revertSlide = () =>{
-        let push = curSlide[0] - 1;
-        if(push < 0) push = totSlides -1
-        curSlide.unshift(push);
-        curSlide.pop();
-    }
-
-
-    nextBtn.addEventListener("click", e =>{
-        forwardSlide();
-        slides.forEach( slide =>{
-            slide.style.display = "none";
-        // slide.style.visibility = "hidden";
-
-            
-        })
-        curSlide.forEach((i) =>{
-            slides[i].style.display = "flex"
-        // slides[i].style.visibility = "visible";
-
-        })
-
-    })
-
-    prevBtn.addEventListener("click", e =>{
-        revertSlide();
-        slides.forEach( slide =>{
-            slide.style.display = "none"
-        // slide.style.visibility = "hidden";
-
-        })
-        curSlide.forEach(i =>{
-            slides[i].style.display = "flex"
-        // slides[i].style.visibility = "visible";
-
-        })
-
-    })
-
-    </script>
 </section>
     
-<!-- feedback form starts here-->
-    <section class="feedback" id="feedback">
-        <div class="feedback-head">Give us Feedback</div>
-        <div class="feedback-form">
-            <form action="" class="feedback-before-submit">
-                <div class="feedback-form-line">
-                    <input type="text" placeholder="First Name">
-                    <input type="text" placeholder="Last Name">
-                </div>
-                <div class="feedback-form-line">
-                    <input type="text" placeholder="Email">
-                    <input type="text" placeholder="Phone Number">
-                </div>
-                <div class="feedback-form-line line-3">
-                    <input type="text" placeholder="Subject">
-                </div>
-                <div class="feedback-form-line line-4">
-                    <textarea name="message" id="" cols="30" rows="10" placeholder = "Write Your Message Here"></textarea>
-                </div>
-                <div class="feedback-form-line line-5">
-                    <input type="submit" value="Send">
-                </div>
-            </form>
-            <div class="feedback-after-submit">
-                
-            </div>
-        </div>
-    </section>
 <!-- for common background of about and contact section -->
     <div class="about-contact-bg">
-        <img src="{{ '/assets/img/about-contact-bg-min.jpeg' | absolute_url }}" alt="" class= "bg-img">
+        <img src="/assets/img/about-contact-bg-min.jpeg" alt="" class= "bg-img">
 
     <!-- about section starts here -->
     <section class="about" id = "about">
@@ -360,11 +383,46 @@
         </div>
 
         <div class="contact-illustration">
-            <img src="{{ '/assets/img/about-bg-img.svg' | absolute_url }} " alt="">
+            <img src="/assets/img/about-bg-img.svg" alt="">
         </div>
     </section>
 
     </div>
+
+
+<!-- feedback form starts here-->
+<section class="feedback" id="feedback">
+        <div class="feedback-head">Give us Feedback</div>
+        <div class="feedback-form">
+
+                <?php if($fdMsg != '') : ?>
+                    <div class = "alert <?php echo $fdMsgClass;?>">
+                        <?php echo $fdMsg?>
+                    </div>
+                <?php endif ;?>
+
+        <form method = "post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+    
+            <div class="feedback-form-line">
+                <input type="text" name = "fd-fname"placeholder="First Name" value = "">
+                <input type="text" name = "fd-lname"placeholder="Last Name" value = "">
+            </div>
+            <div class="feedback-form-line">
+                <input type="text" name = "fd-email" placeholder="Email" value = "">
+                <input type="text" name = "fd-pno" placeholder="Phone Number" value = "">
+            </div>
+            <div class="feedback-form-line line-3">
+                <input type="text" name = "fd-subject" placeholder="Subject" value = "">
+            </div>
+            <div class="feedback-form-line line-4">
+                <textarea name="fd-message" id="" cols="30" rows="10" placeholder = "Write Your Message Here"></textarea>
+            </div>
+            <div class="feedback-form-line line-5">
+                <input type="submit" value="Send" name ="fd-submit">
+            </div>
+        </form>    
+        </div>
+</section>
 
 <!-- footer starts here -->
     <footer>
@@ -384,100 +442,7 @@
                 <li class="foot-links-content-item"><a href="#feedback" class="smooth-scroll">Feedback</a></li>
             </div>
         </div>
-        <!-- <div class="subscribe">
-            <div class="subscribe-head">SUBSCRIBE</div>
-            <div class="subscribe-para">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus pariatur magnam, eius nihil incidunt consequuntur quidem aliquam quisquam amet deleniti ipsa natus fugit. Qui quia pariatur mollitia dicta aperiam quidem!</div>
-            <div class="subscribe-action">
-                <input type="text" placeholder = "Email">
-                <input type="submit" value="Send">
-            </div>
-        </div> -->
     </footer>
-
-   
-
-   
+ 
 </body>
 </html>
-
-
-<!-- extra stuff -->
-<!-- <section class="testimony">
-    <h1 class="head">Testimony</h1>
-    <div class="slideshow-container" >
-
-        <figure class="snip1574 mySlides fade">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample40.jpg" alt="profile-sample2" />
-            <p class="figcaption">
-                <blockquote>
-                <p>Which is worse, that everyone has his price, or that the price is always so low.</p>
-                </blockquote>
-                <h3>Sue Shei</h3>
-                <h5>Founder</h5>
-            </p>
-        </figure>
-            
-        <figure class="snip1574 mySlides fade">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample40.jpg" alt="profile-sample2" />
-            <p class="figcaption">
-                <blockquote>
-                <p>Which is worse, that everyone has his price, or that the price is always so low.</p>
-                </blockquote>
-                <h3>Sue Shei</h3>
-                <h5>Founder</h5>
-            </p>
-        </figure>
-        
-        <figure class="snip1574 mySlides fade">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample40.jpg" alt="profile-sample2" />
-            <figcaption>
-                <blockquote>
-                <p>The only skills I have the patience to learn are those that have no real application in life. </p>
-                </blockquote>
-                <h3>Sue Shei</h3>
-                <h5>Founder</h5>
-            </figcaption>
-        </figure>
-        
-        
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-        
-    </div>
-    <br>
-        
-    <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span> 
-        <span class="dot" onclick="currentSlide(2)"></span> 
-        <span class="dot" onclick="currentSlide(3)"></span> 
-    </div>
-    
-    <script>
-        var slideIndex = 1;
-        showSlides(slideIndex);
-        
-        function plusSlides(n) {
-          showSlides(slideIndex += n);
-        }
-        
-        function currentSlide(n) {
-          showSlides(slideIndex = n);
-        }
-        
-        function showSlides(n) {
-          var i;
-          var slides = document.getElementsByClassName("mySlides");
-          var dots = document.getElementsByClassName("dot");
-          if (n > slides.length) {slideIndex = 1}    
-          if (n < 1) {slideIndex = slides.length}
-          for (i = 0; i < slides.length; i++) {
-              slides[i].style.display = "none";  
-          }
-          for (i = 0; i < dots.length; i++) {
-              dots[i].className = dots[i].className.replace(" active", "");
-          }
-          slides[slideIndex-1].style.display = "block";  
-          dots[slideIndex-1].className += " active";
-        }
-        </script>
-</section> -->

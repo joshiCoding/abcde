@@ -111,3 +111,13 @@ prevBtn.addEventListener("click", e =>{
  })
 
 })
+
+
+// for demo submit button
+const demoBeforeSubmit = document.querySelector('.demo-before-submit');
+const demoAfterSubmit = document.querySelector('.demo-after-submit');
+
+demoBeforeSubmit.querySelector('input[submit]').addEventListener('click', () =>{
+    demoBeforeSubmit.style.display = "none";
+    demoAfterSubmit.style.display = "flex";
+})

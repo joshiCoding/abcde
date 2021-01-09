@@ -30,3 +30,20 @@ var scroll = new SmoothScroll('.smooth-scroll', {
     updateURL:false,
     offset:80
 });
+
+
+// for demo submit button
+const demoBeforeSubmit = document.querySelector('.demo-before-submit');
+const demoAfterSubmit = document.querySelector('.demo-after-submit');
+
+demoBeforeSubmit.querySelector('input[type="submit"]').addEventListener('click', (e) =>{
+    e.preventDefault();
+    demoBeforeSubmit.style.display = "none";
+    demoAfterSubmit.style.display = "flex";
+});
+
+demoAfterSubmit.querySelector('button').addEventListener('click', () =>{
+    demoBeforeSubmit.style.display = "flex";
+    demoAfterSubmit.style.display = "none";
+    
+})
