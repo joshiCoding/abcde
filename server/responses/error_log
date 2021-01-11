@@ -1,0 +1,14 @@
+[09-Jan-2021 11:45:46 UTC] PHP Notice:  Undefined index: name in /home/ydfwqsch6bzi/public_html/responses/feedbackResponse.php on line 7
+[09-Jan-2021 11:54:52 UTC] PHP Notice:  Undefined index: name in /home/ydfwqsch6bzi/public_html/responses/feedbackResponse.php on line 7
+[10-Jan-2021 05:22:58 UTC] PHP Notice:  Undefined variable: mailReciever in /home/ydfwqsch6bzi/public_html/responses/demoResponse.php on line 14
+[10-Jan-2021 05:22:58 UTC] PHP Notice:  Undefined variable: mailSender in /home/ydfwqsch6bzi/public_html/responses/demoResponse.php on line 15
+[10-Jan-2021 05:24:44 UTC] PHP Notice:  Undefined variable: mailReciever in /home/ydfwqsch6bzi/public_html/responses/demoResponse.php on line 14
+[10-Jan-2021 05:24:44 UTC] PHP Notice:  Undefined variable: mailSender in /home/ydfwqsch6bzi/public_html/responses/demoResponse.php on line 15
+[10-Jan-2021 05:27:20 UTC] PHP Warning:  include(./data/data.php): failed to open stream: No such file or directory in /home/ydfwqsch6bzi/public_html/responses/demoResponse.php on line 2
+[10-Jan-2021 05:27:20 UTC] PHP Warning:  include(): Failed opening './data/data.php' for inclusion (include_path='.:/opt/alt/php73/usr/share/pear') in /home/ydfwqsch6bzi/public_html/responses/demoResponse.php on line 2
+[10-Jan-2021 05:27:20 UTC] PHP Notice:  Undefined variable: mailReciever in /home/ydfwqsch6bzi/public_html/responses/demoResponse.php on line 15
+[10-Jan-2021 05:27:20 UTC] PHP Notice:  Undefined variable: mailSender in /home/ydfwqsch6bzi/public_html/responses/demoResponse.php on line 16
+[10-Jan-2021 05:27:29 UTC] PHP Warning:  include(./data/data.php): failed to open stream: No such file or directory in /home/ydfwqsch6bzi/public_html/responses/demoResponse.php on line 2
+[10-Jan-2021 05:27:29 UTC] PHP Warning:  include(): Failed opening './data/data.php' for inclusion (include_path='.:/opt/alt/php73/usr/share/pear') in /home/ydfwqsch6bzi/public_html/responses/demoResponse.php on line 2
+[10-Jan-2021 05:27:29 UTC] PHP Notice:  Undefined variable: mailReciever in /home/ydfwqsch6bzi/public_html/responses/demoResponse.php on line 15
+[10-Jan-2021 05:27:29 UTC] PHP Notice:  Undefined variable: mailSender in /home/ydfwqsch6bzi/public_html/responses/demoResponse.php on line 16

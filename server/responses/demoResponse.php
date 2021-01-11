@@ -1,7 +1,5 @@
 <?php
-// setting basic variable 
-$mailReciever = 'mohit9451joshi@gmail.com';// replace this with client destination email
-$mailSender = "Office@abcdeducators.in";
+include '../data/data.php';
 
 // getting data from request
 htmlspecialchars($_POST['name']);

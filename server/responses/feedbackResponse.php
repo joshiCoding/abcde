@@ -1,7 +1,5 @@
 <?php
-// setting basic variable 
-$mailReciever = 'mohit9451joshi@gmail.com';// replace this with client destination email
-$mailSender = "Office@abcdeducators.in";
+include '../data/data.php';
 
 // getting data from request
 
@@ -44,7 +42,7 @@ if((!empty($email)|| !empty($phone))&& (!empty($sub) || !empty($msg) || !empty($
 
     if(mail($to, $subject,$message,$headers)){
         //email sent
-        echo "Thanks for giving feedback <br>We will looking into your feedback very sincerely.";
+        echo "Thanks for giving feedback <br>We will be looking into your feedback very sincerely.";
     }
     else{
         //Failed 

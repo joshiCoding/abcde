@@ -8,6 +8,11 @@ $copyright = "&copy;ABCDE Educators 2020-2021";
 $developer = "Mohit Joshi";
 $developerSite = "http://joshimohit.co/";
 
+// Email Settings
+$mailSender = "Office@abcdeducators.in";
+$mailReciever = 'contact@abcdeducators.in';
+
+
 // menu items
 $menuItems = [["Courses", "#courses"],
 ["Programs", "#programs"],
